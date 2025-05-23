@@ -4,38 +4,7 @@ Here are key code highlights that showcase the technical implementation behind t
 
 ---
 
-## 1. Animation System with Anime.js
-
-```tsx
-useEffect(() => {
-    if (hasMounted && ShoeEventCardContentRef.current) {
-        document.body.style.overflow = 'hidden';
-        // Staggered Children Animation
-        anime.timeline()
-        .add({
-            targets: ShoeEventCardContentRef.current,
-            translateY: ['100%', '0%'],
-            opacity: [0, 1],
-            easing: 'easeOutQuad',
-            duration: 800,
-        })
-        .add({
-            targets: ShoeEventCardContentRef.current.querySelectorAll('.animate-item'),
-            opacity: [0, 1],
-            translateY: [30, 0],
-            easing: 'easeOutExpo',
-            duration: 600,
-            delay: anime.stagger(100),
-        });
-    }
-}, [hasMounted]);
-```
-
-**Explanation**: Smooth, staggered animations for modal content using Anime.js, enhancing user experience with professional entrance effects.
-
----
-
-## 2. Responsive Design Implementation
+## 1. Responsive Design Implementation
 
 ```tsx
 const isDesktop = useMediaQuery({ query: '(min-width: 640px)' });
@@ -57,29 +26,33 @@ const isDesktop = useMediaQuery({ query: '(min-width: 640px)' });
 
 ---
 
-## 3. 3D Model Integration with Three.js
+## 2. Tailwind Configuration for Brand Colors
 
-```tsx
-export default function App() {
-  const isDesktop = useMediaQuery({ query: '(min-width: 640px)' });
-
-  return (
-    <Canvas style={{ width: '100%', height: '300px', touchAction: 'pan-y', pointerEvents: 'none' }}>
-      <PerspectiveCamera makeDefault fov={isDesktop ? 8 : 10} position={[1.3, 1.8, 0.6]} />
-      <ambientLight intensity={3} />
-      <directionalLight position={[10, 10, 5]} intensity={2} castShadow />
-      <OrbitControls autoRotate autoRotateSpeed={2} enablePan={false} enableZoom={false} enableRotate={false}/>
-      <Model />
-    </Canvas>
-  );
-}
+```ts
+export default {
+  theme: {
+    extend: {
+      fontFamily: {
+        playfair: ['var(--font-playfair)'],
+        montserrat: ['var(--font-montserrat)'],
+      },
+      colors: {
+        primary: "#1D1912",
+        secondary: "#F3F3E6",
+        tertuary: "#EECD5C",
+        quartery: "#D2A63C",
+        quinary: "#BB8525",
+      },
+    },
+  },
+} satisfies Config;
 ```
 
-**Explanation**: Displays interactive 3D shoe models using React Three Fiber with responsive camera control and automatic rotation.
+**Explanation**: Tailwind theme extension for consistent brand styling, including custom fonts and a palette based on brand identity.
 
 ---
 
-## 4. Custom Font Implementation
+## 3. Custom Font Implementation
 
 ```tsx
 import { Playfair_Display, Montserrat } from 'next/font/google';
@@ -111,33 +84,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ---
 
-## 5. Tailwind Configuration for Brand Colors
 
-```ts
-export default {
-  theme: {
-    extend: {
-      fontFamily: {
-        playfair: ['var(--font-playfair)'],
-        montserrat: ['var(--font-montserrat)'],
-      },
-      colors: {
-        primary: "#1D1912",
-        secondary: "#F3F3E6",
-        tertuary: "#EECD5C",
-        quartery: "#D2A63C",
-        quinary: "#BB8525",
-      },
-    },
-  },
-} satisfies Config;
-```
-
-**Explanation**: Tailwind theme extension for consistent brand styling, including custom fonts and a palette based on brand identity.
+**Explanation**: Each header letter is animated individually with hover effects and vertical wave-like spacing, enhancing branding and engagement.
 
 ---
 
-## 6. Interactive Header Animation
+## 4. Interactive Header Animation
 
 ```tsx
 <div className="flex flex-row gap-1 items-center group">
@@ -164,6 +116,61 @@ export default {
 ```
 
 **Explanation**: Each header letter is animated individually with hover effects and vertical wave-like spacing, enhancing branding and engagement.
+
+---
+
+## 5. Animation System with Anime.js
+
+```tsx
+useEffect(() => {
+    if (hasMounted && ShoeEventCardContentRef.current) {
+        document.body.style.overflow = 'hidden';
+        // Staggered Children Animation
+        anime.timeline()
+        .add({
+            targets: ShoeEventCardContentRef.current,
+            translateY: ['100%', '0%'],
+            opacity: [0, 1],
+            easing: 'easeOutQuad',
+            duration: 800,
+        })
+        .add({
+            targets: ShoeEventCardContentRef.current.querySelectorAll('.animate-item'),
+            opacity: [0, 1],
+            translateY: [30, 0],
+            easing: 'easeOutExpo',
+            duration: 600,
+            delay: anime.stagger(100),
+        });
+    }
+}, [hasMounted]);
+```
+
+**Explanation**: Smooth, staggered animations for modal content using Anime.js, enhancing user experience with professional entrance effects.
+
+---
+
+
+
+## 6. 3D Model Integration with Three.js
+
+```tsx
+export default function App() {
+  const isDesktop = useMediaQuery({ query: '(min-width: 640px)' });
+
+  return (
+    <Canvas style={{ width: '100%', height: '300px', touchAction: 'pan-y', pointerEvents: 'none' }}>
+      <PerspectiveCamera makeDefault fov={isDesktop ? 8 : 10} position={[1.3, 1.8, 0.6]} />
+      <ambientLight intensity={3} />
+      <directionalLight position={[10, 10, 5]} intensity={2} castShadow />
+      <OrbitControls autoRotate autoRotateSpeed={2} enablePan={false} enableZoom={false} enableRotate={false}/>
+      <Model />
+    </Canvas>
+  );
+}
+```
+
+**Explanation**: Displays interactive 3D shoe models using React Three Fiber with responsive camera control and automatic rotation.
 
 ---
 
